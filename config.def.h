@@ -160,7 +160,7 @@ unsigned int defaultcs = 256;
 unsigned int defaultrcs = 257;
 
 /// cursorline color
-unsigned int const cursorLineBg = 258; // 0 no-bg
+unsigned int const cursorLineBg = 0; // 0 no-bg
 unsigned int const currentBg = cursorLineBg, buffSize = 2048;
 /// Enable double / triple click yanking / selection of word / line.
 int const mouseYank = 1, mouseSelect = 0;
@@ -169,17 +169,18 @@ unsigned int const highlightBg = 160, highlightFg = 15;
 char const wDelS[] = "!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~", wDelL[] = " \t";
 /// Shortcusts executed in normal mode
 char *nmKeys [] = {
-  "R/Building\nN", "r/Building\n", "X/juli@machine\nN", "x/juli@machine\n",
-  "Q?[Leaving vim, starting execution]\n", "F/: error:\nN", "f/: error:\n", "DQf"
+  "R/Building\nN", "r/Building\n",
+  "F/err\nN", "f/error", "f/ERR", "f/ERROR",
 };
 unsigned int const amountNmKeys = sizeof(nmKeys) / sizeof(*nmKeys);
 /// Style of the {command, search} string shown in the right corner (y,v,V,/)
 Glyph styleSearch = {' ', ATTR_ITALIC | ATTR_BOLD_FAINT, 7, 16};
+// Index: Meaning   | Attributes    | FG   | BG
 Glyph style[] = {
-    {' ', ATTR_ITALIC|ATTR_FAINT, 15, 16},  // yank
-    {' ', ATTR_ITALIC, 232, 11},            // visual
-    {' ', ATTR_ITALIC, 232, 4},             // visualLine
-    {' ', ATTR_ITALIC, 232, 12}             // no operation
+    {' ', ATTR_ITALIC|ATTR_FAINT,   15,     16},  // 0:yank
+    {' ', ATTR_ITALIC,              237,    11},  // 1:visual
+    {' ', ATTR_ITALIC,              237,    4},   // 2:visualLine
+    {' ', ATTR_ITALIC,              232,    12}   // 3:no operation
 };
 
 /*
@@ -200,7 +201,6 @@ static unsigned int cursorshape = 1;
 /*
  * Default columns and rows numbers
  */
-
 static unsigned int cols = 80;
 static unsigned int rows = 24;
 
